@@ -12,3 +12,9 @@
 
 `git push origin feature_A:feature_A`
 
+
+
+#  拉取本地没有的远程分支到本地
+
+`git checkout -b 本地分支名 origin/远程分支名`
+
