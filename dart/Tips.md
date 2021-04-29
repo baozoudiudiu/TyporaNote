@@ -192,6 +192,35 @@
   }
   ```
   
+* ### **要** 使用 `whereType()` 按类型过滤集合。
+
+  假设你有一个 list 里面包含了多种类型的对象， 但是你指向从它里面获取整型类型的数据。 那么你可以像下面这样使用 `where()` ：
+
+  ```dart
+  var objects = [1, "a", 2, "b", 3];
+  var ints = objects.where((e) => e is int);
+  ```
+
+  这个很罗嗦，但是更糟糕的是，它返回的可迭代对象类型可能并不是你想要的。 在上面的例子中，虽然你想得到一个 `Iterable<int>`，然而它返回了一个 `Iterable<Object>`， 这是因为，这是你过滤后得到的类型。
+
+  有时候你会看到通过添加 `cast()` 来“修正”上面的错误：
+
+  ```dart
+  var objects = [1, "a", 2, "b", 3];
+  var ints = objects.where((e) => e is int).cast<int>();
+  ```
+
+  代码冗长，并导致创建了两个包装器，获取元素对象要间接通过两层，并进行两次多余的运行时检查。 幸运的是，对于这个用例，核心库提供了 `whereType()`][where-type](https://api.dartlang.org/stable/dart-core/Iterable/whereType.html) 方法：
+
+  ```dart
+  var objects = [1, "a", 2, "b", 3];
+  var ints = objects.whereType<int>();
+  ```
+
+  使用 `whereType()` 简洁， 生成所需的 [Iterable](https://api.dartlang.org/stable/dart-core/Iterable-class.html)（可迭代）类型， 并且没有不必要的层级包装。
+
+  
+
   
 
 ```dart
