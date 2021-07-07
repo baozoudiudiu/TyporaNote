@@ -32,9 +32,3 @@ let block : @convention(block) (Any, Bool) -> () = callback
 3、基于第二点的结果，猜测，swift的closure和oc的block，虽然都是闭包，但毕竟是不同语言，应该是不同实现，大多数情况在项目中通用，但是具体到这里，swift调oc的runtime去传参，把closure传过去，就出问题，无法copy，closure直接在函数结束时销毁了
 
 4、尝试了解block的底层，并了解closure和block的差异，最终找到了可以显示转换的方法
-
-
-作者：zhangferry
-链接：https://juejin.cn/post/6950085396512374820
-来源：掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
