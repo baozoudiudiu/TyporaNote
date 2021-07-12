@@ -18,3 +18,7 @@ http://10.9.17.49/carlife_applet/carlifeapplet
 
 
 
+7月：
+
+1、ocr自定义库文档编写
+
