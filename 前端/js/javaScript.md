@@ -8,23 +8,23 @@ function isValid(obj, key) {
 
 /// 是否是有效并且非空的字符串
 function isValidString(str) {
-  if (!isValid(str, "String")) {
-    return false
+  if (typeof(str) === "string" || isValid(str, "String")) {
+    return str.length > 0
   }
-  return str.length > 0
+  return false
 }
 
 /// 是否是有效的数字类型
 function isValidNum(num) {
-  if (!isValid(num, 'Number')) {
-    return false
+  if (typeof(num) === "number" || isValid(num, 'Number')) {
+    return !isNaN(num)
   }
-  return !isNaN(num)
+  return false
 }
 
 /// 是否是有效的布尔类型
 function isValidBool(bool) {
-  return isValid(bool, 'Boolean')
+  return (typeof(bool) === "boolean" || isValid(bool, 'Boolean'))
 }
 
 /// 是否是对象类型并且属性非空
