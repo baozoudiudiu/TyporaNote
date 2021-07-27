@@ -30,10 +30,10 @@ function isValidBool(bool) {
 /// 是否是对象类型并且属性非空
 function isEmptyObj(obj) {
   if (!isValid(obj, 'Object')) {
-    return false
+    return true
   }
-  for (key in obj) {return true}
-  return false
+  for (key in obj) {return false}
+  return true
 }
 
 /// 是否是非空数组
