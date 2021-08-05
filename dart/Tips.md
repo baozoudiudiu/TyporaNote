@@ -219,9 +219,6 @@
 
   使用 `whereType()` 简洁， 生成所需的 [Iterable](https://api.dartlang.org/stable/dart-core/Iterable-class.html)（可迭代）类型， 并且没有不必要的层级包装。
 
-  
-
-  
 
 ```dart
 var a = 1; /// 自动识别变量类型

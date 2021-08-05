@@ -1,4 +1,7 @@
+[toc]
+
 ### 判断数据类型：
+
 使用`typeof`并不能很好的区分`Array，undefined，null`，所以使用`Object.prototype.toString.call`来判断数据类型
 
 ```javascript
@@ -133,11 +136,13 @@ bindFunc('123') /// bind会重新生成一个函数，此函数中的this为bind
    console.log(person.money);
    ```
 
-   ### javaScript对象的继承
+---
+
+### javaScript对象的继承
 
    #### 1.伪继承
 
-   父类:
+父类:
 
    ```javascript
    // 父类
@@ -150,7 +155,7 @@ bindFunc('123') /// bind会重新生成一个函数，此函数中的this为bind
    }
    ```
 
-   子类:
+子类:
 
    ```javascript
    // 子类
@@ -165,7 +170,7 @@ bindFunc('123') /// bind会重新生成一个函数，此函数中的this为bind
    }
    ```
 
-   示例：
+示例：
 
    ```javascript
    let sender = {name: 'diudiu', age: 18}
@@ -178,9 +183,168 @@ bindFunc('123') /// bind会重新生成一个函数，此函数中的this为bind
    log diudiu
    ```
 
-   优点：代码简洁。
+接着上面的代码，我们继续添加如下代码：为父类Parent再添加一个方法，并在子类s中调用
 
-   缺点：并不是真正意义上的继承，原型链上并没有建立起继承的关系。后续如果`Parent.prototype`有添加新方法和属性，`Sub`创建的实例对象是访问不到的。
+   ```javascript
+   Parent.prototype.log2 = function() {
+     console.log('log2', this.name)
+   }
+   s.log2()
+   ```
 
-   
+可以看到控制台报错如下：
+
+   ```javascript
+   TypeError: s.log2 is not a function
+   ```
+
+进一步验证：
+
+   ```javascript
+   console.log(s instanceof Sub)
+   console.log(s instanceof Parent)
+   ```
+
+控制台输出如下：
+
+   ```javascript
+   true
+   false
+   ```
+
+综上所述此种方式：
+
+   > 优点：代码简洁。
+   >
+   > 缺点：并不是真正意义上的继承，原型链上并没有建立起继承的关系。后续如果`Parent.prototype`有添加新方法和属性，`Sub`创建的实例对象是访问不到的。   
+
+
+#### 2.原型链继承 
+
+创建一个中间对象来实现继承链
+
+父类：
+
+```javascript
+// 父类
+function Parent(sender) {
+	this.name = sender.name
+}
+
+Parent.prototype.log = function() {
+	console.log('log', this.name)
+}
+```
+
+子类:
+
+```javascript
+// 子类
+function Sub(sender) {
+	Parent.call(this, sender)
+  this.age = sender.age
+}
+```
+
+创建中间对象，并改写原型链关系
+
+```javascript
+// 中间对象
+var F = function(){}
+// 将其原型对象指向父类原型对象
+F.prototype = Parent.prototype
+// 将子类的原型对象指向中间对象
+Sub.prototype = new F()
+// 修改构造方法
+Sub.prototype.constructor = Sub
+```
+
+至此就完成了，我们可以代码验证一下:
+
+```javascript
+let s = new Sub({name: 'diudiu', age: 18})
+s.log()
+console.log(s instanceof Sub, s instanceof Parent)
+```
+
+控制台输出如下：
+
+```javascript
+log diudiu
+true true
+```
+
+我们给父类扩充一个方法, 并通过子类调用:
+
+```javascript
+Parent.prototype.log2 = function() {
+  console.log('log2', this.name)
+}
+s.log2()
+
+// 控制台输出
+log2 diudiu
+```
+
+可以看到，后续`Parent.prototype`有添加新方法和属性，`Sub`创建的实例对象是可以访问到的。 
+
+综上所述：  
+
+>优点：在原型链层面上实现了继承关系。后续 `Parent.prototype`有任何的属性和方法扩展，子类仍然能能够访问到。
+>
+>缺单：需要创建一个中间对象来实现，要对原型链有一定的了解。
+
+#### 3.通过ES6特性class来实现继承关系
+
+定义父类:
+
+```javascript
+class Parent {
+	constructor(sender) {
+		this.name = sender.name
+	}
+
+	log() {
+		console.log('log', this.name)
+	}
+}
+```
+
+定义子类：
+
+```javascript
+class Sub extends Parent {
+	constructor(sender) {
+		super(sender)
+		this.age = sender.age
+	}
+}
+```
+
+代码验证：
+
+```javascript
+let s = new Sub(sender)
+console.log(s)
+s.log()
+console.log(s instanceof Sub)
+console.log(s instanceof Parent)
+```
+
+控制台输出：
+
+```javascript
+Sub { name: 'diudiu', age: 18 }
+log diudiu
+true
+true
+```
+
+可以看到子类没有定义log方法，能够访问到父类的log方法。
+
+综上所述：
+
+>优点：代码简洁，容易理解，不需要自己来实现一个中间对象。
+>
+>缺点：不是所有的主流浏览器都支持ES6的class
 
