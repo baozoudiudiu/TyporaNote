@@ -98,8 +98,6 @@
   }
   ```
 
-  
-
   将**"composed"**设置为true时，方法的调用顺序为:`testClick1 -> viewTap -> testClick2`
 
   
