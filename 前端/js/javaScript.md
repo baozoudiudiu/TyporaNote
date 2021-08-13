@@ -1,6 +1,6 @@
 [toc]
 
-### 判断数据类型：
+### 1.判断数据类型：
 
 使用`typeof`并不能很好的区分`Array，undefined，null`，所以使用`Object.prototype.toString.call`来判断数据类型
 
@@ -31,12 +31,11 @@ function isValidBool(bool) {
 }
 
 /// 是否是个空对象或者不是对象类型
-function isEmptyObj(obj) {
+function isNotEmptyObj(obj) {
   if (!isValid(obj, 'Object')) {
-    return true
+    return false
   }
-  for (key in obj) {return false}
-  return true
+  return Object.getOwnPropertyNames(obj).length > 0
 }
 
 /// 是否是非空数组
@@ -46,7 +45,7 @@ function isNotEmptyArray(arr) {
 }
 ```
 ---
-### 指定this
+### 2.指定this
 
 `call`，`apply`，`bind`
 
@@ -75,7 +74,7 @@ bindFunc('123') /// bind会重新生成一个函数，此函数中的this为bind
 
 ---
 
-### setter、getter
+### 3.setter、getter
 
 1. 直接在创建对象时设置
 
@@ -138,7 +137,7 @@ bindFunc('123') /// bind会重新生成一个函数，此函数中的this为bind
 
 ---
 
-### javaScript对象的继承
+### 4.javaScript对象的继承
 
    #### 1.伪继承
 
@@ -347,4 +346,72 @@ true
 >优点：代码简洁，容易理解，不需要自己来实现一个中间对象。
 >
 >缺点：不是所有的主流浏览器都支持ES6的class
+
+---
+
+### 5.遍历对象的key
+
+#### 1.for ... in (遍历可枚举的key, 包括原型上的)
+
+```javascript
+let obj = {
+  a: 1, b: 2
+}
+for (let key in obj) {
+  console.log(key)
+}
+
+// log:
+a
+b
+```
+
+#### 2.Object.keys (遍历可枚举的key，不包括原型上的)
+
+```javascript
+let obj = {
+  a: 1, b: 2
+}
+console.log(Object.keys(obj))
+
+// log
+['a', 'b']
+```
+
+#### 3.Object.getOwnPropertyNames (遍历所有的key，包括可枚举和不可枚举的key, 不包括原型上的)
+
+```javascript
+let obj = {a: 1, b: 2}
+Object.defineProperty(obj, 'c', {enumerable: false, value: 3})
+console.log(Object.getOwnPropertyNames(obj))
+
+// log
+[ 'a', 'b', 'c' ]
+```
+
+----
+
+### 6.补充
+
+#### 1.hasOwnProperty
+
+想判断枚举出来的这个key是当前对象自己的，还是原型上的，可以通过`hasOwnProperty`来判断。
+
+```javascript
+let obj = {a: 1, b: 2}
+let newObj = Object.create(obj)
+newObj.c = 3
+for(let key in newObj) {
+	console.log(key, newObj.hasOwnProperty(key))
+}
+
+// log
+c true
+a false
+b fals
+```
+
+#### 2.创建纯净的对象
+
+`Object.create(null)`创建出来的是一个纯净的对象，它是没有原型的。
 

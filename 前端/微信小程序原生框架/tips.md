@@ -100,7 +100,71 @@
 
   将**"composed"**设置为true时，方法的调用顺序为:`testClick1 -> viewTap -> testClick2`
 
-  
+---
+
+### 2、页面中调用自定义组件中的方法
+
+自定义组件test.js
+
+```javascript
+methods: {
+	show: function() {
+    console.log('test show')
+  }
+}
+```
+
+页面index.wxml:
+
+```html
+<view>
+	<test id="test"></test>
+</view>
+```
+
+页面index.js:
+
+```javascript
+// 在需要触发show方法的地方
+this.selectComponent('#test').show()
+
+// 控制台打印如下：
+test show
+```
+
+---
+
+### 3、高亮模式，暗黑模式
+
+官网链接：https://developers.weixin.qq.com/miniprogram/dev/framework/ability/darkmode.html#%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-theme-json
+
+wxss中：
+
+```css
+/* 一般情况下的样式 begin */
+.some-background {
+    background: white;
+}
+.some-text {
+    color: black;
+}
+/* 一般情况下的样式 end */
+
+@media (prefers-color-scheme: dark) {
+    /* DarkMode 下的样式 start */
+    .some-background {
+        background: #1b1b1b;
+    }
+    .some-text {
+        color: #ffffff;
+    }
+    /* DarkMode 下的样式 end */
+}
+```
+
+
+
+
 
 
 
