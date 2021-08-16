@@ -35,7 +35,10 @@ function isNotEmptyObj(obj) {
   if (!isValid(obj, 'Object')) {
     return false
   }
-  return Object.getOwnPropertyNames(obj).length > 0
+  for (let key in obj) {
+    return true
+  }
+  return false
 }
 
 /// 是否是非空数组
