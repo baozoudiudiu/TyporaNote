@@ -392,11 +392,9 @@ console.log(Object.getOwnPropertyNames(obj))
 [ 'a', 'b', 'c' ]
 ```
 
-----
+#### 4. 补充
 
-### 6.补充
-
-#### 1.hasOwnProperty
+##### 1.hasOwnProperty
 
 想判断枚举出来的这个key是当前对象自己的，还是原型上的，可以通过`hasOwnProperty`来判断。
 
@@ -414,7 +412,39 @@ a false
 b fals
 ```
 
-#### 2.创建纯净的对象
+##### 2.创建纯净的对象
 
 `Object.create(null)`创建出来的是一个纯净的对象，它是没有原型的。
+
+---
+
+### 6. arguments
+
+函数的参数个数不确定时，我们可以通过**arguments**关键字来获取
+
+```javascript
+function func() {
+  console.log(arguments)
+}
+func(1,2,3,4,5,6)
+```
+
+控制台输出：
+
+```
+[Arguments] { '0': 1, '1': 2, '2': 3, '3': 4, '4': 5, '5': 6 }
+```
+
+可以通过下标的方式读取
+
+```javascript
+arguments[0] // 1
+arguments[1] // 2
+...
+arguments[6] // undefined
+```
+
+
+
+
 
