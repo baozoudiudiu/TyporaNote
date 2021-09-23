@@ -1,3 +1,4 @@
+[toc] 
 * 所有变量引用的都是 *对象*，每个对象都是一个 *类* 的实例。数字、函数以及 `null` 都是对象。所有的类都继承于 [Object](https://api.dart.dev/stable/dart-core/Object-class.html) 类。
 
 * class的`私有方法`和`私有属性`使用`_`开头命名。如果您好奇 Dart 为什么使用下划线而不使用诸如 `public` 或 `private` 作为修饰符，请参阅 [SDK 议题 #33383](https://github.com/dart-lang/sdk/issues/33383)
