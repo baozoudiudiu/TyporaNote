@@ -10,17 +10,21 @@ function isValid(obj, key) {
 }
 
 /// 是否是有效并且非空的字符串
-function isValidString(str) {
+function isValidString(str, fuzzy=true) {
   if (typeof(str) === "string" || isValid(str, "String")) {
+    if (fuzzy) {
+      return str.length > 0 && str !== 'undefined' && str !== 'null' && str !== 'Null' && str != 'NULL'
+    }
     return str.length > 0
   }
   return false
 }
 
 /// 是否是有效的数字类型
-function isValidNum(num) {
-  if (typeof(num) === "number" || isValid(num, 'Number')) {
-    return !isNaN(num)
+function isValidNum(num, fuzzy=false) {
+  let res = fuzzy ? parseInt(num) : num
+  if (typeof(res) === "number" || isValid(res, 'Number')) {
+    return !isNaN(res)
   }
   return false
 }
@@ -46,6 +50,7 @@ function isNotEmptyArray(arr) {
   if (!isValid(arr, 'Array')) {return false}
   return arr.length > 0  
 }
+
 ```
 ---
 ### 2.指定this
