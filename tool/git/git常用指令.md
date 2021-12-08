@@ -92,7 +92,29 @@ git remote set-url origin 新地址
 git remote prune origin
 ```
 
+### 将本地分支推送到远程分支
 
+```git
+git push origin <本地分支名>:<远程分支名>
+```
+
+### 将本地当前分支推送到远程对应同名分支
+
+```
+git push origin <本地分支名>
+```
+
+### 将远程分支拉取到本地分支
+
+```
+git pull origin <远程分支>:<本地分支>
+```
+
+### 将远程指定分支拉取到本地当前分支
+
+```
+git pull origin <远程分支>
+```
 
 
 
