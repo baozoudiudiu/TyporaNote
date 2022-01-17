@@ -32,7 +32,6 @@ flex_center()
 ```stylus
 mainColor = red;
 
-
 .class
 	background-color: mainColor
   
