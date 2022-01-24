@@ -41,3 +41,4 @@
 | pod ‘Alamofire’, :git => ‘https://github.com/Alamofire/Alamofire.git’, :branch => ‘dev’ | 指定分支，默认提交最新节点            |
 | pod ‘Alamofire’, :git => ‘https://github.com/Alamofire/Alamofire.git’, :tag => ‘3.1.1’ | 指定版本从tag 节点拉取                |
 | pod ‘Alamofire’, :git => ‘https://github.com/Alamofire/Alamofire.git’, :commit => ‘0f506b1c45’ | master 分支，从指定提交节点拉取       |
+
