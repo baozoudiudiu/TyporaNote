@@ -100,7 +100,7 @@ NSRegularExpression *regex2 = [NSRegularExpression regularExpressionWithPattern:
 
 **二、使用正则表达式的Searchig字符串**
 
-```objective-c
+```obj
 **// @param string 匹配的字符串** 
 
 1. **// @param options 匹配的规则** 
