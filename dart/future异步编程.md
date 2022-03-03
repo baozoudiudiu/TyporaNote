@@ -76,7 +76,7 @@ Future.wait([
 
 示例
 
-```
+```dart
 import 'dart:async';
 
 void main() {
@@ -111,7 +111,7 @@ void main() {
 
 示例用户信息的存取
 
-```
+```dart
 void saveLoginUser(LoginUser user) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var loginUserStr = json.encode(user);
