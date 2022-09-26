@@ -132,5 +132,11 @@ git config --gloabl --unset http.proxy
 git config --global --unset https.proxy
 ```
 
-
+打开代理软件，配置好代理之后，去终端输入 git配置命令，命令如下：
+git config --global [http.https://github.com.proxy](https://links.jianshu.com/go?to=http.https%3A%2F%2Fgithub.com.proxy) socks5://127.0.0.1:10000
+如此就从根本上解决了问题，下面附上设置代理前后 git命令的速度
+代理前 10k/s ☹️
+代理后 600k/s 😍
+PS：如果要恢复/移除上面设置的 git代理，使用如下命令
+git config --global --unset [http.https://github.com.proxy](https://links.jianshu.com/go?to=http.https%3A%2F%2Fgithub.com.proxy)
 
